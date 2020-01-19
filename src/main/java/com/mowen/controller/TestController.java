@@ -1,8 +1,8 @@
 package com.mowen.controller;
 
+import com.mowen.bean.TestBean;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TestController
@@ -13,9 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class TestController {
-    @RequestMapping("/hello")
-    public String hello(){
-        log.info("test hello world!");
-        return "Hello World";
+    @ResponseBody
+    @RequestMapping(value = "/test", method= RequestMethod.POST)
+    public TestBean test(@RequestBody TestBean test){
+        log.info("TestController start!");
+        System.out.println("name: " + test.getName());
+        return test;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test", method= RequestMethod.GET)
+    public TestBean test1(@RequestParam String name){
+        log.info("Test1Controller start!");
+        System.out.println("name: " + name);
+        TestBean tb = new TestBean();
+        tb.setName(name);
+        return tb;
     }
 }
