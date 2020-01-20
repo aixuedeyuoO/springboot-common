@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mowen.mapper.TestTableMapper">
+    <resultMap type="com.mowen.model.TestTableInfo" id="TestTableInfoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="testMessage" column="testMessage"/>
+        <result property="updatedTime" column="updatedTime"/>
+        <result property="createdTime" column="createdTime"/>
+    </resultMap>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+            `id`,
+            `name`,
+            `testMessage`,
+            `updatedTime`,
+            `createdTime`,
+        </trim>
+    </sql>
+
+    <select id="selectTestTableInfoById" resultMap="TestTableInfoMap">
+        select
+        <include refid="allResult"></include>
+        from  `test_table`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id}
+            </if>
+        </trim>
+    </select>
+</mapper>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mowen.mapper.base.TestTableBaseMapper">
+
+
+    <insert id="insertTestTableInfo"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `test_table`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="testMessage!=null">
+                        `testMessage`,
+                    </if>
+                    <if test="updatedTime!=null">
+                        `updatedTime`,
+                    </if>
+                    <if test="createdTime!=null">
+                        `createdTime`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="testMessage!=null">
+                    #{testMessage},
+                </if>
+                <if test="updatedTime!=null">
+                    #{updatedTime},
+                </if>
+                <if test="createdTime!=null">
+                    #{createdTime},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateTestTableInfo">
+        UPDATE `test_table`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="testMessage != null and testMessage!=''">
+                `testMessage` = #{testMessage},
+            </if>
+            <if test="updatedTime != null">
+                `updatedTime` = #{updatedTime},
+            </if>
+            <if test="createdTime != null">
+                `createdTime` = #{createdTime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `test_table`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.name != null and set.name!=''">
+            `name` = #{set.name},
+        </if>
+        <if test="set.testMessage != null and set.testMessage!=''">
+            `testMessage` = #{set.testMessage},
+        </if>
+        <if test="set.updatedTime != null">
+            `updatedTime` = #{set.updatedTime},
+        </if>
+        <if test="set.createdTime != null">
+            `createdTime` = #{set.createdTime},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.nameList != null">
+                    `name` in
+                    <foreach collection="where.nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyName!=null and where.fuzzyName.size()>0">
+                (
+                <foreach collection="where.fuzzyName"  separator="or" item="item">
+                    `Name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyName!=null and where.rightFuzzyName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyName"  separator="or" item="item">
+                    `Name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.testMessageList != null">
+                    `testMessage` in
+                    <foreach collection="where.testMessageList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyTestMessage!=null and where.fuzzyTestMessage.size()>0">
+                (
+                <foreach collection="where.fuzzyTestMessage"  separator="or" item="item">
+                    `TestMessage` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyTestMessage!=null and where.rightFuzzyTestMessage.size()>0">
+                (
+                <foreach collection="where.rightFuzzyTestMessage"  separator="or" item="item">
+                    `TestMessage` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.updatedTimeList != null">
+                    `updatedTime` in
+                    <foreach collection="where.updatedTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updatedTimeSt !=null">
+                `updatedTime` >= #{where.updatedTimeSt} and
+            </if>
+            <if test="where.updatedTimeEd!=null">
+                `updatedTime` &lt;= #{where.updatedTimeEd} and
+            </if>
+                <if test="where.createdTimeList != null">
+                    `createdTime` in
+                    <foreach collection="where.createdTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createdTimeSt !=null">
+                `createdTime` >= #{where.createdTimeSt} and
+            </if>
+            <if test="where.createdTimeEd!=null">
+                `createdTime` &lt;= #{where.createdTimeEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.mowen.model.TestTableInfo" id="TestTableInfoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="testMessage" column="testMessage"/>
+        <result property="updatedTime" column="updatedTime"/>
+        <result property="createdTime" column="createdTime"/>
+    </resultMap>
+
+
+    <select id="queryTestTableInfo" resultMap="TestTableInfoMap">
+        select
+        <include refid="baseResult"></include>
+        from  `test_table`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="testMessage != null and testMessage!=''">
+                `testMessage` = #{testMessage} and
+            </if>
+            <if test="updatedTime != null">
+                `updatedTime` = #{updatedTime} and
+            </if>
+            <if test="createdTime != null">
+                `createdTime` = #{createdTime} and
+            </if>
+            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="testMessageList != null">
+                    `testMessage` in
+                    <foreach collection="testMessageList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyTestMessage!=null and fuzzyTestMessage.size()>0">
+                    (
+                    <foreach collection="fuzzyTestMessage"  separator="or" item="item">
+                        `TestMessage` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTestMessage!=null and rightFuzzyTestMessage.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTestMessage"  separator="or" item="item">
+                        `TestMessage` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="updatedTimeList != null">
+                    `updatedTime` in
+                    <foreach collection="updatedTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updatedTimeSt !=null">
+                    `updatedTime` >= #{updatedTimeSt} and
+                </if>
+                <if test="updatedTimeEd!=null">
+                    `updatedTime` &lt;= #{updatedTimeEd} and
+                </if>
+                <if test="createdTimeList != null">
+                    `createdTime` in
+                    <foreach collection="createdTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createdTimeSt !=null">
+                    `createdTime` >= #{createdTimeSt} and
+                </if>
+                <if test="createdTimeEd!=null">
+                    `createdTime` &lt;= #{createdTimeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryTestTableInfoLimit1" resultMap="TestTableInfoMap">
+        select
+        <include refid="baseResult"></include>
+        from  `test_table`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="testMessage != null and testMessage!=''">
+                `testMessage` = #{testMessage} and
+            </if>
+            <if test="updatedTime != null">
+                `updatedTime` = #{updatedTime} and
+            </if>
+            <if test="createdTime != null">
+                `createdTime` = #{createdTime} and
+            </if>
+            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="testMessageList != null">
+                        `testMessage` in
+                        <foreach collection="testMessageList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyTestMessage!=null and fuzzyTestMessage.size()>0">
+                    (
+                    <foreach collection="fuzzyTestMessage"  separator="or" item="item">
+                        `TestMessage` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyTestMessage!=null and rightFuzzyTestMessage.size()>0">
+                    (
+                    <foreach collection="rightFuzzyTestMessage"  separator="or" item="item">
+                        `TestMessage` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="updatedTimeList != null">
+                        `updatedTime` in
+                        <foreach collection="updatedTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updatedTimeSt !=null">
+                    `updatedTime` >= #{updatedTimeSt} and
+                </if>
+                <if test="updatedTimeEd!=null">
+                    `updatedTime` &lt;= #{updatedTimeEd} and
+                </if>
+                    <if test="createdTimeList != null">
+                        `createdTime` in
+                        <foreach collection="createdTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createdTimeSt !=null">
+                    `createdTime` >= #{createdTimeSt} and
+                </if>
+                <if test="createdTimeEd!=null">
+                    `createdTime` &lt;= #{createdTimeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `name`,
+        `testMessage`,
+        `updatedTime`,
+        `createdTime`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.testMessage==true">
+                        `testMessage`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updatedTime==true">
+                        `updatedTime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createdTime==true">
+                        `createdTime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.testMessage==null">
+                        `testMessage`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updatedTime==null">
+                        `updatedTime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createdTime==null">
+                        `createdTime`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
