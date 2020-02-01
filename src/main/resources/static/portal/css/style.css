@@ -268,12 +268,20 @@ a.article, a.article:hover {
     border-color: #0062CC !important;
 }
 
-.btn-blue-text {
-    width: 60px;
+.btn-a-text {
+    display: block;
+    width: 90px;
+    float: left;
+    padding: 5px;
 }
 
 .operation-nav {
     margin: -30px 0px 8px 8px;
+}
+
+.interval-float {
+    float: left;
+    margin: 0 5px;
 }
 
 

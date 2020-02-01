@@ -7,10 +7,14 @@ app.config(['$routeProvider', function($routeProvider, $provide) {
 			templateUrl : 'portal/templates/home.html',
 			controller: 'HomeController'
 		})
-        .when('/tasks', {
-            templateUrl : 'portal/templates/task.html',
-            controller: 'TaskController'
+        .when('/login', {
+            templateUrl : 'portal/templates/login.html',
+            controller: 'LoginController'
         })
+		.when('/tasks', {
+			templateUrl : 'portal/templates/task.html',
+			controller: 'TaskController'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<div ng-controller="LoginController" >
+
+    <h2 class="only-font-style">Welcome to Stream Calculation Model</h2>
+    <p>Please enter your username and password.</p>
+
+    <div class="line"></div>
+
+    <form name="loginInfo" class="needs-validation" novalidate ng-submit="userLogin()">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label class="only-font-style">Username</label>
+                <input type="text" ng-model="loginInfo.userName" class="form-control" id="username" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label class="only-font-style">Password</label>
+                <input type="password" ng-model="loginInfo.passWord" class="form-control" id="password" required>
+            </div>
+        </div>
+        <button id="submitLogin" class="btn btn-primary only-font-style" type="submit">Sign in</button>
+    </form>
+</div>
+</html>
