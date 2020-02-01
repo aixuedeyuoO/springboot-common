@@ -16,7 +16,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>*:springboot-common*:jar</include>
+                <include>*:stream-calculation*:jar</include>
             </includes>
             <outputDirectory></outputDirectory>
         </dependencySet>

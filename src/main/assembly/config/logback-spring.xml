@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true" scan="true" scanPeriod="30 seconds">
-    <property name="nameNode" value="springboot-common" />
+    <property name="nameNode" value="stream-calculation" />
     <property name="logPath" value="./logs" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -14,7 +14,7 @@
             <charset>UTF-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 配置日志所生成的目录以及生成文件名的规则 在logs/springboot-common-2018-11-11.0.log.zip -->
+            <!-- 配置日志所生成的目录以及生成文件名的规则 在logs/stream-calculation-2018-11-11.0.log.zip -->
             <fileNamePattern>${logPath}/${nameNode}.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
             <!-- 如果按天来回滚，则最大保存时间为365天，365天之前的都将被清理掉 -->
             <!--maxHistory>365</maxHistory-->
