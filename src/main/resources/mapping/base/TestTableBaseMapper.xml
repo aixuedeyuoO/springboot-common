@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mowen.mapper.base.TestTableBaseMapper">
+<mapper namespace="com.stream.mapper.base.TestTableBaseMapper">
 
 
     <insert id="insertTestTableInfo"  useGeneratedKeys="true" keyProperty="id">
@@ -171,7 +171,7 @@
     </update>
 
 
-    <resultMap type="com.mowen.model.TestTableInfo" id="TestTableInfoMap">
+    <resultMap type="com.stream.model.TestTableInfo" id="TestTableInfoMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="testMessage" column="testMessage"/>
@@ -200,7 +200,7 @@
             <if test="createdTime != null">
                 `createdTime` = #{createdTime} and
             </if>
-            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.stream.model.TestTableInfo$QueryBuilder) == true">
                 <if test="idList != null">
                     `id` in
                     <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -301,7 +301,7 @@
             <if test="createdTime != null">
                 `createdTime` = #{createdTime} and
             </if>
-            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.stream.model.TestTableInfo$QueryBuilder) == true">
                     <if test="idList != null">
                         `id` in
                         <foreach collection="idList" close=")" open="(" separator="," item="item">
@@ -397,7 +397,7 @@
 
     <sql id="baseResult">
         <trim suffixOverrides=",">
-            <if test = "(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == true">
+            <if test = "(_parameter instanceof com.stream.model.TestTableInfo$QueryBuilder) == true">
 
                 <if test="fetchFields==null">
                     <include refid="allResult"></include>
@@ -450,7 +450,7 @@
                     </if>
                 </if>
             </if>
-            <if test="(_parameter instanceof com.mowen.model.TestTableInfo$QueryBuilder) == false" >
+            <if test="(_parameter instanceof com.stream.model.TestTableInfo$QueryBuilder) == false" >
                 <include refid="allResult"></include>
             </if>
 

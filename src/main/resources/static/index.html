@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stream Calculation</title>
+
+    <script src="/plugins/js/angular.min.js"></script>
+    <script src="/plugins/js/angular-route.min.js"></script>
+    <script src="/plugins/js/jquery.min.js"></script>
+    <script src="/plugins/js/popper.min.js"></script>
+    <script src="/plugins/js/mask.min.js"></script>
+    <script src="/plugins/js/bootstrap.min.js"></script>
+    <script src="/portal/js/other/portal.js"></script>
+    <script src="/portal/js/app.js"></script>
+    <script src="/portal/js/controller/home.controller.js"></script>
+    <script src="/portal/js/service/home.service.js"></script>
+    <script src="/portal/js/controller/task.controller.js"></script>
+    <script src="/portal/js/service/task.service.js"></script>
+    <link href="/portal/css/style.css" rel="stylesheet">
+    <link href="/plugins/css/normalize.css" rel="stylesheet">
+    <link href="/plugins/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h4 class="standard-margin without-selected logo-font-style" title="Stream Calculation">Stream Calculation</h4>
+        </div>
+        <ul class="list-unstyled components">
+            <div>
+                <p class="navbar-text navbar-user-padding without-selected">aixuedeyuoO</p>
+                <img alt="user" src="/portal/images/userWhite.svg" data-toggle="tooltip" data-placement="top"
+                     ng-click="" class="navbar-user-img" title="User info">
+                <img alt="out" src="/portal/images/outWhite.svg" data-toggle="tooltip" data-placement="top" ng-click=""
+                     class="navbar-user-img" title="Sign out">
+                <div class="line-no-margin"></div>
+            </div>
+            <li>
+                <a class="nav-link nav-link-text font-style selected-left-flag" href="#" aria-expanded="true" onclick="tabSelected('Home')">Home</a>
+            </li>
+            <li>
+                <a class="nav-link nav-link-text font-style selected-left-flag" href="#!/tasks" aria-expanded="false" onclick="tabSelected('Tasks')">Tasks</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <img alt="list" src="/portal/images/listClose.svg" data-toggle="tooltip" data-placement="top"
+                         ng-click="" class="navbar-list-img">
+                    <!--span></span>
+                    <span></span>
+                    <span></span-->
+                </button>
+                <div id="content-user-flag" class="content-user-init">
+                    <div class="navbar-text navbar-user-padding without-selected font-style">aixuedeyuoO</div>
+                    <img alt="user" src="/portal/images/user.svg" data-toggle="tooltip" data-placement="top"
+                         ng-click="" class="navbar-user-img" title="User info">
+                    <img alt="out" src="/portal/images/out.svg" data-toggle="tooltip" data-placement="top" ng-click=""
+                         class="navbar-user-img" title="Sign out">
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item selected-right-flag active">
+                            <a class="nav-link font-style" href="#" onclick="tabSelected('Home')">Home</a>
+                        </li>
+                        <li class="nav-item selected-right-flag">
+                            <a class="nav-link font-style" href="#!/tasks" onclick="tabSelected('Tasks')">Tasks</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div ng-app="proposalApp">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

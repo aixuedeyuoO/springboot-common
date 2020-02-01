@@ -1,5 +1,6 @@
 server:
     port: 8080
+    contextPath: /stream
 logging:
     config: classpath:config/logback-spring.xml
 public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJJCCWYiXeA7akkKvdNL3OvxsCr1AZ4zH3lBTuDz0QDogXmdAedRqG9PJQ2VXuFMbm3IeOvX2jRtZBfrSVtXYMMCAwEAAQ==
@@ -18,6 +19,9 @@ spring:
                     enabled: true
             connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
         filters: stat,log4j2,config
+    devtools:
+        restart:
+            enabled: true
 mybatis:
     mapper-locations: classpath:mapping/*Mapper.xml
     type-aliases-package: com.mowen.model

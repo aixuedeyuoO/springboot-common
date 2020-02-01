@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<div ng-controller="TaskController" data-ng-init="loadProposals()">
+
+    <h2 class="only-font-style">Tasks for streaming</h2>
+    <p>You can manage streaming tasks at this page.</p>
+
+    <div class="line"></div>
+
+    <div class="text-right operation-nav">
+        <button id="btnAddTask" ng-disabled="proposal.add == 'off'" ng-click="" type="button"
+                class="btn btn-xs btn-primary" title="Add a new task">
+            <img alt="add" src="/portal/images/add.svg" width="17px" height="17px" data-toggle="tooltip"
+                 data-placement="top">
+        </button>
+        <button id="btnCopyTask" ng-disabled="proposal.copy == 'off'" ng-click="" type="button"
+                class="btn btn-xs btn-primary" title="Copy a new one by selected">
+            <img alt="copy" src="/portal/images/copy.svg" width="17px" height="17px" data-toggle="tooltip"
+                 data-placement="top">
+        </button>
+        <button id="btnViewTask" ng-disabled="proposal.view == 'off'" ng-click="" type="button"
+                class="btn btn-xs btn-primary" title="View selected task">
+            <img alt="view" src="/portal/images/view.svg" width="17px" height="17px" data-toggle="tooltip"
+                 data-placement="top">
+        </button>
+        <button id="btnEditTask" ng-disabled="proposal.edit == 'off'" ng-click="" type="button"
+                class="btn btn-xs btn-primary" title="Edit selected task">
+            <img alt="edit" src="/portal/images/edit.svg" width="17px" height="17px" data-toggle="tooltip"
+                 data-placement="top">
+        </button>
+        <button id="btnDeleteTask" ng-click="" type="button"
+                class="btn btn-xs btn-danger" title="Delete selected task">
+            <img alt="delete" src="/portal/images/delete.svg" width="17px" height="17px"
+                 data-toggle="tooltip" data-placement="top">
+        </button>
+    </div>
+
+    <p ng-show="messageAnalyze.length" class="alert alert-success">{{messageAnalyze}}</p>
+    <p ng-show="messageDelete.length" class="alert alert-danger ">{{messageDelete}}</p>
+
+    <form name="proposals" class="needs-validation" novalidate ng-submit="loadProposals()">
+        <table class="table table-hover">
+            <tbody ng-repeat="proposal in proposals">
+            <tr>
+                <td>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>
+                                {{ proposal.name }}
+                                <small class="text-muted">({{ proposal.cpf }})</small>
+                            </h5>
+                            <div class="text-right" style="margin-top: -38px;">
+                                <button id="btnStartTask" ng-disabled="proposal.start == 'off'" ng-click="" type="button"
+                                        class="btn btn-xs btn-primary" title="Start task">
+                                    <img alt="start" src="/portal/images/start.svg" width="17px" height="17px" data-toggle="tooltip"
+                                         data-placement="top">
+                                </button>
+                                <button id="btnStopTask" ng-disabled="proposal.stop == 'off'" ng-click="" type="button"
+                                        class="btn btn-xs btn-primary" title="Stop task">
+                                    <img alt="stop" src="/portal/images/stop1.svg" width="17px" height="17px" data-toggle="tooltip"
+                                         data-placement="top">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <img alt="cash" src="/portal/images/cash.svg" width="25px" height="25px"> ${{
+                                proposal.income }}
+                                <img alt="result" src="/portal/images/card.svg" width="25px" height="25px">
+                                <a ng-show="proposal.result == 'Approved'" class="text-success">{{ proposal.result
+                                    }}</a>
+                                <a ng-show="proposal.result == 'Approved'" class="text-muted">
+                                    <small>{{ proposal.limitApproved }}</small>
+                                </a>
+                                <a ng-show="proposal.result == 'Pending'" class="text-warning">{{ proposal.result }}</a>
+                                <a ng-show="proposal.result == 'Denied'" class="text-danger">{{ proposal.result }}</a>
+                                <a ng-show="proposal.result == 'Denied'" class="text-muted">
+                                    <small>{{ proposal.limitApproved }}</small>
+                                </a>
+                            </h6>
+                            <p class="card-text"> {{ proposal.age }} years,
+                                <a ng-show="proposal.dependents > 0"> {{ proposal.dependents }} dependents.</a>
+                                <a ng-show="proposal.dependents == 0"> no dependents. </a>
+                                <a ng-show="proposal.maritalStatus == 'S'"> Single,</a>
+                                <a ng-show="proposal.maritalStatus == 'M'"> Married,</a>
+                                <a ng-show="proposal.maritalStatus == 'D'"> Divorced,</a>
+                                <a ng-show="proposal.maritalStatus == 'W' && proposal.sex == 'M'"> Widower,</a>
+                                <a ng-show="proposal.maritalStatus == 'W' && proposal.sex == 'W'"> Widow,</a>
+                                from {{ proposal.state }}. </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</html>
